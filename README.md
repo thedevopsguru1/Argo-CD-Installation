@@ -35,3 +35,4 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ### Go to the argo CD UI and as username put admin. 
 ### the password will be the one you got from the previous command.
 ![image](https://user-images.githubusercontent.com/107158398/182578162-59320f6d-93f2-4e05-b5d0-d03867d3e367.png)
+# Thanks guys
