@@ -36,3 +36,8 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ### the password will be the one you got from the previous command.
 ![image](https://user-images.githubusercontent.com/107158398/182578162-59320f6d-93f2-4e05-b5d0-d03867d3e367.png)
 # Thanks guys
+# To Uninstall Argo CD from a k8s
+## Use this command:
+```
+kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
