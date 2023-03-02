@@ -12,6 +12,7 @@ kubectl create namespace argocd
 ```
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
+# We have three options: Load balancer or Port forwarding or Ingress
 ## 2. Service Type Load Balancer(Only for work)
 
 ### Change the argocd-server service type to LoadBalancer:
