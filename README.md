@@ -24,6 +24,39 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 ```
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
+## 3.2 Ingress
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: argocd-server-ingress
+ namespace: argocd
+ annotations:
+   cert-manager.io/cluster-issuer: "letsencrypt-prod"
+   kubernetes.io/ingress.class: "nginx"
+   #kubernetes.io/tls-acme: "true"
+   nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+   # If you encounter a redirect loop or are getting a 307 response code
+   # then you need to force the nginx ingress to connect to the backend using HTTPS.
+   #
+   nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+ rules:
+ - host: argocd.anaeleboo.com
+   http:
+     paths:
+     - path: /
+       pathType: Prefix
+       backend:
+         service:
+           name: argocd-server
+           port:
+             name: https
+ tls:
+ - hosts:
+   - argocd.anaeleboo.com
+   secretName: argocd-secret # do not change, this is provided by Argo CD
+ ```
 ### The API server can then be accessed using https://localhost:8080
 ## 4. Login Using The CLI
 ### The initial password for the admin account is auto-generated and stored as clear text in the field password in a secret named argocd-initial-admin-secret in your Argo CD installation namespace. You can simply retrieve this password using kubectl:
