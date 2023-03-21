@@ -133,3 +133,8 @@ spec:
     - argocd.example.com
     secretName: argocd-secret # do not change, this is provided by Argo CD
  ```
+# Connect to Argo CD through CLI
+### Login to ArgoCD
+```
+argocd login argocd_url
+```
